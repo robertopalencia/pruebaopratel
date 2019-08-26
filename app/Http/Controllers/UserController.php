@@ -19,7 +19,7 @@ class UserController extends Controller
         ]);
         if ($v->fails())
         {
-            return response($v->errors(), 400)
+            return response($v->errors()->first(), 400)
                 ->header('Content-Type', 'text/plain');
         }
 
@@ -39,7 +39,7 @@ class UserController extends Controller
         ]);
         if ($v->fails())
         {
-            return response($v->errors(), 400)
+            return response($v->errors()->first(), 400)
                 ->header('Content-Type', 'text/plain');
         }
         $user = User::where('phone', $request->phone)->first();
@@ -53,6 +53,11 @@ class UserController extends Controller
         $payment->amount = $request->amount;
         $payment->save();
         return response(['Pago guardado con exito', $payment->id], 200)
+            ->header('Content-Type', 'text/plain');
+    }
+    public function getUsers(){
+        $users = User::all();
+        return response($users, 200)
             ->header('Content-Type', 'text/plain');
     }
 }

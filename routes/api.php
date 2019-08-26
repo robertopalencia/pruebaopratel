@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('/agregar_usuario', 'UserController@addUser')->name('addUser');
 Route::post('/agregar_pago', 'UserController@addPayment')->name('addPayment');
+Route::get('/usuarios', 'UserController@getUsers')->name('getUsers');
